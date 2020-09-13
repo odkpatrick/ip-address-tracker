@@ -130,18 +130,15 @@ class App extends React.Component {
     };
     var input = this.state.inputValue;
     if(input) {
-      console.log('Search for: ' + this.state.inputValue);
       // test whether input is ip or domain
       var domainRegex = /^[a-z0-9]+([-.][a-z0-9]+)*\.[a-z]{2,}$/i;
       var ip4Regex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
       var domain, ipAddress;
       if(domainRegex.test(input)) {
-        console.log(input + " is domain name");
         // set the domain request variable before the api fetch
         domain = input;
       } else {
         if(ip4Regex.test(input)) {
-          console.log(input + " is IPv4/6");
           // set the ipaddress request variable before the api call
           ipAddress = input;
         }
@@ -152,7 +149,6 @@ class App extends React.Component {
       var url = "https://geo.ipify.org/api/v1?apiKey=" + apiKey;
       locationRequest.onreadystatechange = function() {
         if(this.readyState === 4 && this.status === 200) {
-          console.log(JSON.parse(this.responseText));
           // update address property of app state
           updateAddress({...(JSON.parse(this.responseText))});
         }
@@ -162,7 +158,6 @@ class App extends React.Component {
           url + (domain ? ("&domain=" + domain) : "") + (ipAddress ? ("&ipAddress=" + ipAddress) : ""),
           true);
       locationRequest.send();
-      console.log("Fetching : " + url + (domain ? ("&domain=" + domain) : "") + (ipAddress ? ("&ipAddress=" + ipAddress) : ""));
     }
     event.preventDefault();
   }
