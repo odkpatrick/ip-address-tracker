@@ -19,7 +19,7 @@ const InputForm = props => {
         name="ipinput"
         placeholder="Enter IP address or domain"
       />
-      <button type="submit"></button>
+      <button type="submit" aria-label="submit button"></button>
       </form>
     </div>
   );
